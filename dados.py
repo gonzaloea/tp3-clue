@@ -6,26 +6,30 @@ TIPOS_DADOS = [TIPO_DADO_ESTANDAR, TIPO_DADO_CRECIENTE, TIPO_DADO_DECRECIENTE, T
 
 
 class Dado(object):
-    """Clase que representa un dado cargado para obtener un numero aleatorio,
-    con una probabilidad diferente por cada cara."""
+	"""Clase que representa un dado cargado para obtener un número
+	  aleatorio, con una probabilidad diferente por cada cara.
+	  """
+	def __init__(self, prob_caras):
+		"""Recibe un iterable con las probabilidades de cada resultado
+		del dado.
 
-    def __init__(self, prob_dados):
-        """Recibe un iterable con las probabilidades de cada resultado del dado (empezando por 1).
-        Parametros:
-            - prob_dados: un iterable con tantos elementos como dados se quieran tener.
-            Cada elemento de prob_dados debe ser un iterable, con tantos elementos como caras se deseen,
-            con la probabilidad de aparicion de cada cara. La suma de las probabilidades debe ser 1 (o
-            muy similar), sino lanzara una excepcion de tipo ValueError."""
-        raise NotImplementedError()
+		Parametros:
+		  - prob_caras: un iterable con tantos elementos como caras
+			tiene el dado. El elemento n-ésimo de este iterable es
+			la probabilidad de la cara N.
 
-    def obtener_probabilidades(self):
-        """Devuelve una copia de las probabilidades de ocurrencia de cada cara del dado."""
-        raise NotImplementedError()
+			La suma de las probabilidades debe ser 1 (o muy similar),
+			si no lanzará una excepcion de tipo ValueError.
+		"""
+		raise NotImplementedError()
 
     def lanzar(self):
-        """Lanza todos los dados que tiene, con sus probabilidades asignadas, y devuelve la suma de todos
-        los resultados de lanzadas"""
-        raise NotImplementedError()
+
+        - un entero entre 1 y N, siendo N el número de caras.
+        
+	def obtener_probabilidades(self):
+		"""Devuelve una copia de las probabilidades de ocurrencia de cada cara del dado."""
+		raise NotImplementedError()
 
 
 class DadoEstandar(Dado):
