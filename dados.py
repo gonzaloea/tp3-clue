@@ -24,8 +24,12 @@ class Dado(object):
 		raise NotImplementedError()
 
     def lanzar(self):
+		"""Lanza el dado y devuelve el resultado.
 
+		Devuelve:
         - un entero entre 1 y N, siendo N el número de caras.
+		"""
+		raise NotImplementedError()
         
 	def obtener_probabilidades(self):
 		"""Devuelve una copia de las probabilidades de ocurrencia de cada cara del dado."""
