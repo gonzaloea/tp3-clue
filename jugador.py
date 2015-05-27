@@ -14,7 +14,7 @@ class Jugador(object):
         """Devuelve el nombre del jugador"""
         raise NotImplementedError()
 
-    def __eq___(self, otro):
+    def __eq__(self, otro):
         """Verifica si un jugador es igual a otro jugador.
         Dos jugadores son iguales cuando tienen el mismo nombre"""
         raise NotImplementedError()
