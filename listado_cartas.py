@@ -4,6 +4,9 @@ class ListadoCartas(object):
     que ya se vieron, para saber cuales conviene consultar."""
     def __init__(self, personajes_inicial, armas_inicial, lugares_inicial):
         """Recibe un iterable para las cartas de personajes, armas y lugares."""
+        self.personajes_inicial=personajes_inicial
+        self.armas_inicial=armas_inicial
+        self.lugares_inicial=lugares_inicial
         raise NotImplementedError()
 
     def __str__(self):
