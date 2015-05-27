@@ -21,7 +21,7 @@ class Dado(object):
 			La suma de las probabilidades debe ser 1 (o muy similar),
 			si no lanzará una excepcion de tipo ValueError.
 		"""
-		raise NotImplementedError()
+		self.prob_caras = prob_caras
 
     def lanzar(self):
 		"""Lanza el dado y devuelve el resultado.
@@ -40,13 +40,19 @@ class DadoEstandar(Dado):
     """Clase que representa un dado con una distribucion de probabilidades estandar."""
 
     def __init__(self, caras):
-        raise NotImplementedError()
-
+        probabilidad = float(1)/caras
+		prob_caras = [probabilidad] * caras
+		Dado.__init__(prob_caras)
 
 class DadoCreciente(Dado):
     """Clase que representa un dado con una distribucion de probabilidades creciente."""
     def __init__(self, caras):
-        raise NotImplementedError()
+		prob_caras = []
+		cara_final = caras
+        for cara in range(caras):
+			if cara < cara_final:
+				prob = 
+				
 
 
 class DadoDecreciente(Dado):
