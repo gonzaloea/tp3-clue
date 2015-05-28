@@ -27,12 +27,12 @@ class Jugador(object):
     def asignar_carta(self, carta):
         """Se le asigna una carta a la mano del jugador. Este la marca como vista en su listado
         de cartas."""
-        self.listado_inicial.sacar_carta(carta)
-        mano.append(carta)
+        self.listado.sacar_carta(carta)
+        self.mano.append(carta)
     
     def get_posicion(self):
         """Obtiene la posicion del jugador."""
-        return posicion
+        return self.posicion
 
     def alguna_carta(self, jugada):
         """Se fija si el jugador tiene alguna de las cartas indicadas en la jugada.
@@ -40,16 +40,30 @@ class Jugador(object):
             - jugada: iterable con cartas.
         Salida: si tiene al menos una de las cartas, debe preguntarle al usuario cual
         prefiere mostrarle. Si no tiene ninguna, devuelve None."""
-        raise NotImplementedError()
+        
+        cartas_poseidas = []
+        for carta in jugada:
+			if carta in mano:
+				cartas_poseidas.append(carta)
+		if len(cartas_poseidas) > 1:
+			return self.pedidos.pedir_carta_a_mostrar(self,cartas_poseidas)
+		elif len(cartas_poseidas) == 1:
+			return cartas_poseidas[0]
+		return None
 
     def arriesgar(self):
         """Devuelve arriesgo del usuario (personaje, arma, jugador), o None si no desea arriesgarse."""
-        raise NotImplementedError()
+        return self.pedidos.preguntar_arriesgo()
 
     def mover(self, tablero):
         """Lanza los dados y se mueve en algun sentido por el tablero. Le muestra al usuario el resultado de
         haber lanzado los dados, y le pide el sentido en el que debe moverse."""
-        raise NotImplementedError()
+        puntos_dados=[]
+        for dado in self.dados:
+			puntos_dados.append(dado.lanzar())
+		pedidos.mostrar_dados(puntos_dados)
+		sentido = pedidos.pedir_sentido()
+		tablero.siguiente(self.posicion, sum(puntos_dados), sentido)
 
     def sugerir(self, tablero, otros_jugadores):
         """Si esta en algun lugar para hacer sugerencias, le pregunta al usuario si desea hacer una.
@@ -59,4 +73,11 @@ class Jugador(object):
         Parametros:
             - tablero: tablero del juego.
             - otros_jugadores: un iterable con los demas jugadores, en el orden en el que se les debe consultar."""
-        raise NotImplementedError()
+        lugar = tablero[self.posicion]
+        if lugar is not None:
+			if pedidos.quiere_consultar(lugar):
+				pedidos.mostrar_mano(self.mano)
+				pedidos.mostrar_listado(self.listado_cartas)
+				jugada = (pedidos.pedir_lugar(), pedidos.pedir_arma(), pedidos.pedir_personaje())
+				for jugador in otros_jugadores:
+					jugador.alguna_carta(jugada)
