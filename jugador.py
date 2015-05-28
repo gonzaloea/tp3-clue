@@ -8,25 +8,31 @@ class Jugador(object):
     def __init__(self, nombre, posicion_inicial, listado_inicial, dados, pedidos):
         """Recibe su nombre, una posicion inicial, un listado ya inicializado, los dados a usar
         y alguien que le permita hacerle pedidos al usuario, de la manera que corresponda."""
-        raise NotImplementedError()
+        self.nombre = nombre
+        self.posicion = posicion_inicial 
+        self.listado_cartas = listado_inicial
+        self.dados = dados
+        self.pedidos = pedidos
+        self.mano = []
 
     def get_nombre(self):
         """Devuelve el nombre del jugador"""
-        raise NotImplementedError()
+        return self.nombre
 
     def __eq__(self, otro):
         """Verifica si un jugador es igual a otro jugador.
         Dos jugadores son iguales cuando tienen el mismo nombre"""
-        raise NotImplementedError()
-
+        return self.name is otro.name
+        
     def asignar_carta(self, carta):
         """Se le asigna una carta a la mano del jugador. Este la marca como vista en su listado
         de cartas."""
-        raise NotImplementedError()
+        self.listado_inicial.sacar_carta(carta)
+        mano.append(carta)
     
     def get_posicion(self):
         """Obtiene la posicion del jugador."""
-        raise NotImplementedError()
+        return posicion
 
     def alguna_carta(self, jugada):
         """Se fija si el jugador tiene alguna de las cartas indicadas en la jugada.
