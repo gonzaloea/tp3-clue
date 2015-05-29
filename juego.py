@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from interfaz_juego import InterfazJuego
 from interfaz_jugador import InterfazJugador
 from tablero import Tablero
