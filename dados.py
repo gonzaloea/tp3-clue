@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+import random
 TIPO_DADO_ESTANDAR = "Estandar (todas las caras equiprobables)"
 TIPO_DADO_CRECIENTE = "Creciente"
 TIPO_DADO_DECRECIENTE = "Decreciente"
@@ -30,7 +31,12 @@ class Dado(object):
 		Devuelve:
 		- un entero entre 1 y N, siendo N el número de caras.
 		"""
-		return 0
+		prob = random.random()
+		acum = 0
+		for i,p in enumerate(self.prob_caras):
+			acum += p
+			if acum >= prob:
+				return i
 		
 	def obtener_probabilidades(self):
 		"""Devuelve una copia de las probabilidades de ocurrencia de cada cara del dado."""
@@ -48,13 +54,19 @@ class DadoEstandar(Dado):
 class DadoCreciente(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades creciente."""
 	 def __init__(self, caras):
-		pass
+		caras_lista = range(1,caras+1)
+		total = sum(caras_lista)
+		prob_caras = [float(i)/ total for i in caras_lista]
+		Dado.__init__(self,prob_caras)
 
 
 class DadoDecreciente(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades decreciente."""
 	 def __init__(self, caras):
-		raise NotImplementedError()
+		caras_lista = range(1,caras+1)
+		total = sum(caras_lista)
+		prob_caras = [float(i)/ total for i in caras_lista]
+		Dado.__init__(self,prob_caras[::-1])
 
 
 class DadoTriangular(Dado):
