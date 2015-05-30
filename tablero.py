@@ -13,9 +13,11 @@ class Tablero(object):
 	def __init__(self, casilleros, posiciones):
 		"""Recibe una lista de casilleros. Cada casillero debe contener una cadena
 		con el contenido del casillero, en la posicion indicada, o None si no hay nada."""
-		self.casilleros = casilleros
+		if len(casilleros) != len(posiciones):
+			raise ValueError("La cantidad de casilleros no es igual a la cantidad de posiciones")
+		self.casilleros = casilleros[:]
 		self.len_casilleros = len(casilleros)
-		self.posiciones = posiciones
+		self.posiciones = posiciones[:]
 	   
 	def siguiente_sentido_horario(self, pos, movimiento):
 		"""Devuelve la siguiente posicion en sentido horario.
@@ -27,7 +29,7 @@ class Tablero(object):
 		casillero = pos + movimiento
 		if casillero >= self.len_casilleros:
 			casillero -= self.len_casilleros
-		return self.posiciones[casillero]
+		return casillero
 			
 	def siguiente_sentido_antihorario(self, pos, movimiento):
 		"""Devuelve la siguiente posicion en sentido antihorario.
@@ -39,7 +41,7 @@ class Tablero(object):
 		casillero = pos - movimiento
 		if casillero > 0:
 			casillero += self.len_casilleros
-		return self.posiciones[casillero]
+		return casillero
 
 	def siguiente(self, pos, movimiento, sentido):
 		"""Devuelve la posicion siguiente en el sentido indicado.
@@ -50,7 +52,7 @@ class Tablero(object):
 		Salida: nueva posicion, resultante de moverse en el sentido indicado,
 		una cantidad "moviemiento" de casilleros"""
 		dict_siguiente = { HORARIO : self.siguiente_sentido_horario, ANTIHORARIO : self.siguiente_sentido_antihorario}
-		dict_siguiente[sentido](pos, movimiento)
+		return dict_siguiente[sentido](pos, movimiento)
 		
 	def __getitem__(self, pos):
 		"""Obtiene el contenido del casillero indicado.

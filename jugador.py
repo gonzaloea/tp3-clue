@@ -63,7 +63,7 @@ class Jugador(object):
 			puntos_dados.append(dado.lanzar())
 		self.pedidos.mostrar_dados(puntos_dados)
 		sentido = self.pedidos.pedir_sentido()
-		tablero.siguiente(self.posicion, sum(puntos_dados), sentido)
+		self.posicion = tablero.siguiente(self.posicion, sum(puntos_dados), sentido)
 
 	 def sugerir(self, tablero, otros_jugadores):
 		"""Si esta en algun lugar para hacer sugerencias, le pregunta al usuario si desea hacer una.

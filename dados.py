@@ -23,7 +23,7 @@ class Dado(object):
 			La suma de las probabilidades debe ser 1 (o muy similar),
 			si no lanzará una excepcion de tipo ValueError.
 		"""
-		self.prob_caras = prob_caras
+		self.prob_caras = prob_caras[:]
 
 	def lanzar(self):
 		"""Lanza el dado y devuelve el resultado.
@@ -33,19 +33,18 @@ class Dado(object):
 		"""
 		prob = random.random()
 		acum = 0
-		for i,p in enumerate(self.prob_caras):
+		for i,p in enumerate(self.prob_caras, start = 1):
 			acum += p
 			if acum >= prob:
 				return i
 		
 	def obtener_probabilidades(self):
 		"""Devuelve una copia de las probabilidades de ocurrencia de cada cara del dado."""
-		return self.prob_caras
+		return self.prob_caras[:]
 
 
 class DadoEstandar(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades estandar."""
-
 	 def __init__(self, caras):
 		probabilidad = float(1)/caras
 		prob_caras = [probabilidad] * caras
