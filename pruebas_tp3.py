@@ -4,7 +4,11 @@ from unittest import TestCase
 
 # Importa las clases que se van a probar
 from dados import DadoEstandar
+from dados import DadoCreciente
+from dados import DadoDecreciente
+from dados import DadoTriangular
 from tablero import Tablero
+from listado_cartas import ListadoCartas
 
 
 # Definimos una clase que hereda de TestCase por cada Clase que queremos probar.
@@ -41,6 +45,14 @@ class TestDadoEstandar(TestCase):
 		# Verifico que no se haya modificado su probabilidad dentro del dado.
 		self.assertEqual(probabilidad_anterior, dado.obtener_probabilidades()[0])
 
+class TestDadoCreciente(TestCase):
+	pass
+
+class TestDadoDecreciente(TestCase):
+	pass
+
+class TestDadoTriangular(TestCase):
+	pass
 
 class TestTablero(TestCase):
 
@@ -56,11 +68,41 @@ class TestTablero(TestCase):
 
 	 # Prueba que los casilleros no se puedan modificar desde afuera.
 	 def test_casilleros_no_se_deben_modificar(self):
-		raise NotImplementedError()
+		casilleros = [1,2,3]
+		posiciones = [(1,1),(2,2),(3,3)]
+		tablero = Tablero(casilleros, posiciones)
+		
+		casilleros[0]=2
+		
+		self.assertNotEqual(casilleros[0], tablero[0])
 
 
-#class TestListadoCartas(TestCase):
-#	pass
+class TestListadoCartas(TestCase):
+	#Prueba que los distintos tipos de cartas no se puedan modificar desde afuera.
+	def test_listados_de_cartas_no_se_modifican(self):
+		carta_arma_prueba = "arma1"
+		carta_pj_prueba = "pj1"
+		carta_lugar_prueba = "lugar1"
+		
+		armas=[carta_arma_prueba,"arma2"]
+		personajes=[carta_pj_prueba,"pj2"]
+		lugares=[carta_lugar_prueba,"lugar2"]
+		
+		listado = ListadoCartas(personajes, armas, lugares)
+		
+		listado.sacar_carta(carta_arma_prueba)
+		self.assertTrue(armas[0] is carta_arma_prueba)
+		
+		listado.sacar_carta(carta_pj_prueba)
+		self.assertTrue(personajes[0] is carta_pj_prueba)
+		
+		listado.sacar_carta(carta_lugar_prueba)
+		self.assertTrue(lugares[0] is carta_lugar_prueba)
+	def test_sacar_carta_inexistente(self):
+		listado = ListadoCartas([], [], [])
+		with self.assertRaises(ValueError):
+			listado.sacar_carta("")
+
 
 # Ejecuta todas las pruebas cuando se ejecute este archivo.
 if __name__ == "__main__":
