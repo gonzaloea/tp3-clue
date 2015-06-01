@@ -43,7 +43,7 @@ class Jugador(object):
 		
 		cartas_poseidas = []
 		for carta in jugada:
-			if carta in mano:
+			if carta in self.mano:
 				cartas_poseidas.append(carta)
 		if len(cartas_poseidas) > 1:
 			return self.pedidos.pedir_carta_a_mostrar(self,cartas_poseidas)
@@ -80,4 +80,8 @@ class Jugador(object):
 				self.pedidos.mostrar_listado(self.listado_cartas)
 				jugada = (lugar, self.pedidos.pedir_arma(), self.pedidos.pedir_personaje())
 				for jugador in otros_jugadores:
-					jugador.alguna_carta(jugada)
+					if jugador.alguna_carta(jugada) is not None:
+						carta = jugador.alguna_carta(jugada)
+						self.pedidos.mostrar_carta(jugador,carta)
+					else:
+						self.pedidos.mostrar_no_hay_cartas()
