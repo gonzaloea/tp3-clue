@@ -39,7 +39,7 @@ class Tablero(object):
 		Salida: nueva posicion, resultante de moverse en sentido antihorario
 		una cantidad "moviemiento" de casilleros"""
 		casillero = pos - movimiento
-		if casillero > 0:
+		if casillero < 0:
 			casillero += self.len_casilleros
 		return casillero
 
