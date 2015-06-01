@@ -78,6 +78,6 @@ class Jugador(object):
 			if self.pedidos.quiere_consultar(lugar):
 				self.pedidos.mostrar_mano(self.mano)
 				self.pedidos.mostrar_listado(self.listado_cartas)
-				jugada = (self.pedidos.pedir_lugar(), self.pedidos.pedir_arma(), self.pedidos.pedir_personaje())
+				jugada = (lugar, self.pedidos.pedir_arma(), self.pedidos.pedir_personaje())
 				for jugador in otros_jugadores:
 					jugador.alguna_carta(jugada)
