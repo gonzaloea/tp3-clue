@@ -74,37 +74,17 @@ class DadoTriangular(Dado):
 	 las caras cercanas al valor medio tienen mayor probabilidad, y a medida que nos alejamos
 	 de dicho valor la probabilidad va disminuyendo."""
 	 def __init__(self, caras):
-		inicial = 1
-		final = caras
-		medio = math.ceil(float(final)/2)
-		prob_caras=[]	
-		medio_par = -1
-		
-		#Para que cuando es par sean iguales los del medio.
-		if caras % 2 == 0:
-			medio_par = medio+1
-			
-		#Casos especiales en donde el calculo no funciona
-		if caras == 1:
-			prob_caras = [1]
-		elif caras == 2:
-			prob_caras = [0.5,0.5]
+		lista=range(1,caras+1)
+		medio = caras/2
+		if caras % 2==0:
+			creciente = lista[:medio]
+			decreciente = lista[medio-1::-1]
 		else:
-		#Si no son los casos especiales hago el cálculo.
-			for valor in range(inicial,final+1):
-				prob=None
-				if valor >= inicial and valor < medio:
-					prob = float(2*(valor-inicial))/((final-inicial)*(medio-inicial))
-				elif valor == medio:
-					prob = 2/float(final-inicial)
-				elif valor == medio_par:
-					prob = 2/float(final-inicial)
-					medio = medio_par
-				elif valor > medio and valor <= final:
-					prob = float(2*(final-valor))/((final-inicial)*(final-medio))
-				if prob is not None:
-					prob_caras.append(prob)
+			creciente = lista[:medio] 
+			decreciente = lista[medio::-1]
+		suma_total = sum(creciente)+ sum(decreciente)
+		prob_caras=[i/float(suma_total) for i in creciente]
+		prob_caras.extend([i/float(suma_total) for i in decreciente])
 		Dado.__init__(self,prob_caras)
-
 
 GENERADORES = [DadoEstandar, DadoCreciente, DadoDecreciente, DadoTriangular]
