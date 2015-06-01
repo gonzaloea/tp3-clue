@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
 import random
+import math
 TIPO_DADO_ESTANDAR = "Estandar (todas las caras equiprobables)"
 TIPO_DADO_CRECIENTE = "Creciente"
 TIPO_DADO_DECRECIENTE = "Decreciente"
