@@ -10,7 +10,16 @@ class ListadoCartas(object):
 
 	 def __str__(self):
 		"""Convierte el listado en una cadena"""
-		raise NotImplementedError()
+		listado_mensaje="Personajes: "
+		for personaje in self.personajes:
+			listado_mensaje += personaje+", "
+		listado_mensaje+="\nArmas: "
+		for arma in self.armas:
+			listado_mensaje += arma+", "
+		listado_mensaje+="\nLugares: "
+		for lugar in self.lugares:
+			listado_mensaje += lugar+", "
+		return listado_mensaje
 
 	 def sacar_carta(self, carta):
 		"""Saca una determinada carta de los listados de personajes, armas y lugares (los marca como "vistos")"""
