@@ -47,6 +47,8 @@ class Dado(object):
 class DadoEstandar(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades estandar."""
 	 def __init__(self, caras):
+		if caras <= 0:
+			raise ValueError
 		probabilidad = float(1)/caras
 		prob_caras = [probabilidad] * caras
 		Dado.__init__(self,prob_caras)
@@ -54,6 +56,8 @@ class DadoEstandar(Dado):
 class DadoCreciente(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades creciente."""
 	 def __init__(self, caras):
+		if caras <= 0:
+			raise ValueError
 		caras_lista = range(1,caras+1)
 		total = sum(caras_lista)
 		prob_caras = [float(i)/ total for i in caras_lista]
@@ -63,6 +67,8 @@ class DadoCreciente(Dado):
 class DadoDecreciente(Dado):
 	 """Clase que representa un dado con una distribucion de probabilidades decreciente."""
 	 def __init__(self, caras):
+		if caras <= 0:
+			raise ValueError
 		caras_lista = range(1,caras+1)
 		total = sum(caras_lista)
 		prob_caras = [float(i)/ total for i in caras_lista]
@@ -74,6 +80,8 @@ class DadoTriangular(Dado):
 	 las caras cercanas al valor medio tienen mayor probabilidad, y a medida que nos alejamos
 	 de dicho valor la probabilidad va disminuyendo."""
 	 def __init__(self, caras):
+		if caras <= 0:
+			raise ValueError
 		lista=range(1,caras+1)
 		medio = caras/2
 		if caras % 2==0:

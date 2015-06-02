@@ -10,11 +10,8 @@ from dados import DadoTriangular
 from tablero import Tablero
 from listado_cartas import ListadoCartas
 
-
-
 # Definimos una clase que hereda de TestCase por cada Clase que queremos probar.
-
-#Se creo una clase para dado en general para probar varias cosas en comun de los dados.
+# Se creo una clase para dado en general para probar varias cosas en comun de los dados.
 class TestDado(TestCase):
 	 # Este otro metodo, por ejemplo, verifica que las probabilidades de ocurrencia de
 	 # cada cara no se puedan modificar.
@@ -55,6 +52,10 @@ class TestDadoEstandar(TestCase):
 		#Se usa 0.99 porque por razones de aproximacion al dividir nunca llega a dar 1 la suma.
 		dado = DadoEstandar(6)
 		self.assertTrue(sum(dado.obtener_probabilidades()) > 0.99)
+	
+	def test_dado_con_caras_cero(self):
+		with self.assertRaises(ValueError):
+			DadoEstandar(0)
 
 
 class TestDadoCreciente(TestCase):
@@ -69,6 +70,10 @@ class TestDadoCreciente(TestCase):
 		#Se usa 0.99 porque por razones de aproximacion al dividir nunca llega a dar 1 la suma.
 		dado = DadoCreciente(6)
 		self.assertTrue(sum(dado.obtener_probabilidades()) > 0.99)
+	
+	def test_dado_con_caras_cero(self):
+		with self.assertRaises(ValueError):
+			DadoCreciente(0)
 
 class TestDadoDecreciente(TestCase):
 	def test_probabilidades_son_decrecientes(self):
@@ -82,6 +87,10 @@ class TestDadoDecreciente(TestCase):
 		#Se usa 0.99 porque por razones de aproximacion al dividir nunca llega a dar 1 la suma.
 		dado = DadoDecreciente(6)
 		self.assertTrue(sum(dado.obtener_probabilidades()) > 0.99)
+	
+	def test_dado_con_caras_cero(self):
+		with self.assertRaises(ValueError):
+			DadoDecreciente(0)
 
 class TestDadoTriangular(TestCase):
 	def test_prob_son_triang_con_caras_par(self):
@@ -111,7 +120,11 @@ class TestDadoTriangular(TestCase):
 		
 		dado = DadoTriangular(5)
 		self.assertEqual(sum(dado.obtener_probabilidades()), 1)
-		
+
+	def test_dado_con_caras_cero(self):
+		with self.assertRaises(ValueError):
+			DadoTriangular(0)
+	
 class TestTablero(TestCase):
 
 	 # Prueba que la creacion usando listas de diferentes largos levante una excepcion.
