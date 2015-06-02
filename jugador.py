@@ -85,6 +85,8 @@ class Jugador(object):
 					if carta is not None:
 						lista_cartas.append(carta)
 				if lista_cartas:
-					self.pedidos.mostrar_carta(jugador,carta)
+					for carta in lista_cartas:
+						self.listado_cartas.sacar_carta(carta)
+						self.pedidos.mostrar_carta(jugador,carta)
 				else:
 					self.pedidos.mostrar_no_hay_cartas()
