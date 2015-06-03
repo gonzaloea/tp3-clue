@@ -29,5 +29,3 @@ class ListadoCartas(object):
 			self.armas.remove(carta)
 		elif carta in self.lugares:
 			self.lugares.remove(carta)
-		else:
-			raise ValueError()

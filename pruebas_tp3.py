@@ -55,7 +55,7 @@ class TestDadoEstandar(TestCase):
 	
 	def test_dado_con_caras_cero(self):
 		with self.assertRaises(ValueError):
-			DadoEstandar(0)
+			DadoE(0)
 
 
 class TestDadoCreciente(TestCase):
@@ -169,10 +169,6 @@ class TestListadoCartas(TestCase):
 		
 		listado.sacar_carta(carta_lugar_prueba)
 		self.assertTrue(lugares[0] is carta_lugar_prueba)
-	def test_sacar_carta_inexistente(self):
-		listado = ListadoCartas([], [], [])
-		with self.assertRaises(ValueError):
-			listado.sacar_carta("")
 
 
 # Ejecuta todas las pruebas cuando se ejecute este archivo.
