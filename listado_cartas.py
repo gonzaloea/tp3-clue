@@ -10,12 +10,12 @@ class ListadoCartas(object):
 
 	 def __str__(self):
 		"""Convierte el listado en una cadena"""
-		listado_mensaje="Personajes: \n"
-		for index,personaje in enumerate(self.personajes):
-			listado_mensaje += str(index+1) +". "+personaje+"\n"
 		listado_mensaje+="\nArmas: \n"
 		for index,arma in enumerate(self.armas):
 			listado_mensaje += str(index+1) +". "+arma+"\n"
+		listado_mensaje="\nPersonajes: \n"
+		for index,personaje in enumerate(self.personajes):
+			listado_mensaje += str(index+1) +". "+personaje+"\n"
 		listado_mensaje+="\nLugares:\n"
 		for index,lugar in enumerate(self.lugares):
 			listado_mensaje += str(index+1) +". "+lugar+"\n"
