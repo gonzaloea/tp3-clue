@@ -55,7 +55,7 @@ class TestDadoEstandar(TestCase):
 	
 	def test_dado_con_caras_cero(self):
 		with self.assertRaises(ValueError):
-			DadoE(0)
+			DadoEstandar(0)
 
 
 class TestDadoCreciente(TestCase):
@@ -160,7 +160,9 @@ class TestListadoCartas(TestCase):
 		lugares=[carta_lugar_prueba,"lugar2"]
 		
 		listado = ListadoCartas(personajes, armas, lugares)
-		
+		#Lo que se verifica es que la lista con la que se creo no sufra modificaciones
+		#es decir que el objeto de listadoCartas no comparta una referencia a la misma
+		#lista.
 		listado.sacar_carta(carta_arma_prueba)
 		self.assertTrue(armas[0] is carta_arma_prueba)
 		
