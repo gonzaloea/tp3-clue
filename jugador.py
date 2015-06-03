@@ -74,7 +74,7 @@ class Jugador(object):
 				- tablero: tablero del juego.
 				- otros_jugadores: un iterable con los demas jugadores, en el orden en el que se les debe consultar."""
 		lugar = tablero[self.posicion]
-		lista_cartas = []
+		jugadores_cartas = []
 		if lugar is not None:
 			if self.pedidos.quiere_consultar(lugar):
 				self.pedidos.mostrar_mano(self.mano)
@@ -83,9 +83,9 @@ class Jugador(object):
 				for jugador in otros_jugadores:
 					carta = jugador.alguna_carta(jugada)
 					if carta is not None:
-						lista_cartas.append(carta)
-				if lista_cartas:
-					for carta in lista_cartas:
+						jugadores_cartas.append((jugador,carta))
+				if jugadores_cartas:
+					for jugador, carta in jugadores_cartas:
 						self.listado_cartas.sacar_carta(carta)
 						self.pedidos.mostrar_carta(jugador,carta)
 				else:
